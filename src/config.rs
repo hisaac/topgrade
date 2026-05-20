@@ -257,6 +257,8 @@ pub struct Pixi {
 pub struct Brew {
     #[merge(strategy = merge::option::overwrite_none)]
     greedy_cask: Option<bool>,
+    #[merge(strategy = crate::utils::merge_strategies::vec_prepend_opt)]
+    greedy_cask_include: Option<Vec<String>>,
     #[merge(strategy = merge::option::overwrite_none)]
     greedy_latest: Option<bool>,
     #[merge(strategy = merge::option::overwrite_none)]
@@ -1537,6 +1539,15 @@ impl Config {
             .as_ref()
             .and_then(|c| c.greedy_auto_updates)
             .unwrap_or(false)
+    }
+
+    /// Explicit casks to greedily upgrade
+    pub fn brew_greedy_cask_include(&self) -> &[String] {
+        self.config_file
+            .brew
+            .as_ref()
+            .and_then(|c| c.greedy_cask_include.as_deref())
+            .unwrap_or(&[])
     }
 
     /// Whether Brew should autoremove
