@@ -2388,6 +2388,20 @@ x = "cmd_x"
         assert_eq!(env_vars[1], ("VAR2".to_string(), "bar".to_string()));
     }
 
+    #[test]
+    fn test_include_config_data_option() {
+        let config = config_from_toml(
+            r#"
+[misc]
+include_config_data = true
+"#,
+        );
+        assert!(config.include_config_data());
+
+        let default_config = config();
+        assert!(!default_config.include_config_data());
+    }
+
     fn config_from_toml(toml_str: &str) -> Config {
         Config {
             opt: CommandLineArgs::parse_from::<_, String>([]),
