@@ -85,6 +85,9 @@
 # Cleanup temporary or old files (default: false)
 # cleanup = true
 
+# Pass `--include-config-data` to `softwareupdate --list` on macOS (default: false)
+# include_config_data = true
+
 # Send a notification for every step (default: false)
 # notify_each_step = false
 

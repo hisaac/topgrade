@@ -468,6 +468,9 @@ pub struct Misc {
     cleanup: Option<bool>,
 
     #[merge(strategy = merge::option::overwrite_none)]
+    include_config_data: Option<bool>,
+
+    #[merge(strategy = merge::option::overwrite_none)]
     notify_each_step: Option<bool>,
 
     /// Deprecated: use `notify_end = "never"` instead
@@ -1277,6 +1280,15 @@ impl Config {
                 .as_ref()
                 .and_then(|misc| misc.cleanup)
                 .unwrap_or(false)
+    }
+
+    /// Tell whether to include extra config data in `softwareupdate --list`.
+    pub fn include_config_data(&self) -> bool {
+        self.config_file
+            .misc
+            .as_ref()
+            .and_then(|misc| misc.include_config_data)
+            .unwrap_or(false)
     }
 
     /// Get the [RunType] for the current execution

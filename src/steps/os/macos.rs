@@ -104,11 +104,13 @@ pub fn upgrade_macos(ctx: &ExecutionContext) -> Result<()> {
 }
 
 fn system_update_available(ctx: &ExecutionContext) -> Result<bool> {
-    let output = ctx
-        .execute("softwareupdate")
-        .always()
-        .arg("--list")
-        .output_checked_utf8()?;
+    let mut command = ctx.execute("softwareupdate");
+    command.always().arg("--list");
+    if ctx.config().include_config_data() {
+        command.arg("--include-config-data");
+    }
+
+    let output = command.output_checked_utf8()?;
 
     debug!("{:?}", output);
 
