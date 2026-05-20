@@ -2390,13 +2390,13 @@ x = "cmd_x"
 
     #[test]
     fn test_include_config_data_option() {
-        let config = config_from_toml(
+        let config_with_option = config_from_toml(
             r#"
 [misc]
 include_config_data = true
 "#,
         );
-        assert!(config.include_config_data());
+        assert!(config_with_option.include_config_data());
 
         let default_config = config();
         assert!(!default_config.include_config_data());
