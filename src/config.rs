@@ -2387,6 +2387,20 @@ x = "cmd_x"
         assert_eq!(env_vars[1], ("VAR2".to_string(), "bar".to_string()));
     }
 
+    #[test]
+    fn test_brew_greedy_cask_include() {
+        let config = config_from_toml(
+            r#"
+[brew]
+greedy_cask_include = ["wezterm", "visual-studio-code"]
+"#,
+        );
+        assert_eq!(
+            config.brew_greedy_cask_include(),
+            &["wezterm".to_string(), "visual-studio-code".to_string()]
+        );
+    }
+
     fn config_from_toml(toml_str: &str) -> Config {
         Config {
             opt: CommandLineArgs::parse_from::<_, String>([]),

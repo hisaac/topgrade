@@ -179,7 +179,9 @@
 # greedy_cask = true
 
 # For the BrewCask step
-# Explicit casks to greedily upgrade with:
+# Explicit casks to greedily upgrade in addition to the regular cask upgrade.
+# Useful for casks that should always track latest updates.
+# Executed with:
 # `brew upgrade --cask --greedy <cask_name...>`
 # greedy_cask_include = ["wezterm", "another-cask"]
 
