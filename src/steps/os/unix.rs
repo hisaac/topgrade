@@ -474,10 +474,10 @@ pub fn run_brew_cask(ctx: &ExecutionContext, variant: BrewVariant) -> Result<()>
 
     let greedy_cask_include = ctx.config().brew_greedy_cask_include();
     if !greedy_cask_include.is_empty() {
-        let mut command = brew.execute(ctx)?;
-        command.args(["upgrade", "--cask", "--greedy"]);
-        command.args(greedy_cask_include);
-        command.status_checked()?;
+        brew.execute(ctx)?
+            .args(["upgrade", "--cask", "--greedy"])
+            .args(greedy_cask_include)
+            .status_checked()?;
     }
 
     if ctx.config().cleanup() {

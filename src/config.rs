@@ -1541,7 +1541,8 @@ impl Config {
             .unwrap_or(false)
     }
 
-    /// Explicit casks to greedily upgrade
+    /// Explicit casks to greedily upgrade.
+    /// Returns an empty list when not configured.
     pub fn brew_greedy_cask_include(&self) -> &[String] {
         self.config_file
             .brew
