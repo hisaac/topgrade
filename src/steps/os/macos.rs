@@ -104,8 +104,8 @@ pub fn upgrade_macos(ctx: &ExecutionContext) -> Result<()> {
 }
 
 fn system_update_available(ctx: &ExecutionContext) -> Result<bool> {
-    let mut command = ctx.execute("softwareupdate");
-    command.always().arg("--list");
+    let mut command = ctx.execute("softwareupdate").always();
+    command.arg("--list");
     if ctx.config().include_config_data() {
         command.arg("--include-config-data");
     }
